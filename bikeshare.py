@@ -133,7 +133,7 @@ def time_stats(df):
     df['hour'] = df['Start Time'].dt.hour
     print('\nMost popular start hour is:  ', df['hour'].mode()[0])
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took {} seconds." .format( (time.time() - start_time)))
     print('-'*40)
 
 
