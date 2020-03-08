@@ -14,3 +14,4 @@ Make use of Python to explore data related to bike share systems for three major
 * new_york_city.csv
 
 ### Credits
+Credits to udacity and it instructors 
