@@ -133,7 +133,7 @@ def time_stats(df):
     df['hour'] = df['Start Time'].dt.hour
     print('\nMost popular start hour is:  ', df['hour'].mode()[0])
 
-    print("\nThis took %s seconds." % (time.time() - start_time))
+    print("\nThis took {} seconds." .format( (time.time() - start_time)))
     print('-'*40)
 
 
@@ -156,7 +156,7 @@ def station_stats(df):
     x = str(df.groupby(['Start Station', 'End Station']).size().sort_values(ascending=False).head(1).index[0])
     x = x.replace('(', '').replace(')', '').replace("'", '')
     print('Most frequent combination of start and end station: ',x.strip())
-    print("\nThis took %s seconds."  %(time.time() - start_time))
+    print("\nThis took {} seconds."  .format(time.time() - start_time))
     print('-'*40)
 
 
