@@ -26,8 +26,8 @@ def get_filters():
     # TO DO: get user input for month (all, january, february, ... , june)
     mnth = ['january', 'february', 'march', 'april', 'may', 'june']
     month = 0
-    
-    
+
+
     if ( resp == 'month' or resp == 'both'):
         while (month not in mnth):
             month = input('Specify the month (e.g. all, january, february, ... , june) .. \n').lower()
@@ -46,7 +46,7 @@ def get_filters():
         if day!='all':
             days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
             day = days.index(day) + 1
-    
+
     print('-'*40)
     return city, month, day
 
@@ -84,7 +84,7 @@ def load_data(city, month, day):
     if (day != 'all' and day != 0):
         # filter by day of week to create the new dataframe
         df = df[df['day of week'] == day]
-        
+
 
 
     return df
@@ -103,7 +103,7 @@ def data_display(df):
                 break
             else:
                 print("\nPlease enter a valid response...\nTry again!\n")
-        
+
         while (resp != 'no'):
             resp = input("Do you want to see more raw data (yes or no): ").lower()
             if resp == 'yes':
@@ -112,22 +112,22 @@ def data_display(df):
 
         if (resp == 'no'):
             break
-            
-        
-        
+
+
+
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
     start_time = time.time()
-    
+
     # TO DO: display the most common month
     months = ['january', 'february', 'march', 'april', 'may', 'june']
     print('Most common month is:   ', months[df['month'].mode()[0] - 1])
     # TO DO: display the most common day of week
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-    
+
     print('\nMost common day is:  ',days[df['day of week'].mode()[0]])
     # TO DO: display the most common start hour
     df['hour'] = df['Start Time'].dt.hour
@@ -142,10 +142,10 @@ def station_stats(df):
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
     start_time = time.time()
-    
-    
+
+
     #df['Start Station'] = df['Start Station'].to_string(index = False, header = False)
-    
+
     # TO DO: display most commonly used start station
     dfx = df[df['hour'] == df['hour'].mode()[0]]
     print('The most commonly used start station: ', dfx['Start Station'].mode()[0])
@@ -156,7 +156,7 @@ def station_stats(df):
     x = str(df.groupby(['Start Station', 'End Station']).size().sort_values(ascending=False).head(1).index[0])
     x = x.replace('(', '').replace(')', '').replace("'", '')
     print('Most frequent combination of start and end station: ',x.strip())
-    print("\nThis took %s seconds."  %(time.time() - start_time))
+    print("\nThis took {} seconds."  .format(time.time() - start_time))
     print('-'*40)
 
 
@@ -204,19 +204,19 @@ def user_stats(df):
     else:
         var = 'N/A'
     print('\nEarliest year of birth: {}'.format(var))
- 
+
     if 'Birth Year' in df.columns:
         var = int(df['Birth Year'].max())
     else:
         var = 'N/A'
     print('\nMost recent birth year: {}'.format(var))
- 
+
     if 'Birth Year' in df.columns:
         var = int(df['Birth Year'].mode()[0])
     else:
         var = 'N/A'
     print('Most common year of birth: {}'.format(var))
- 
+
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
